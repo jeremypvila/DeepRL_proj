@@ -21,7 +21,7 @@ Before running any code, please set up an environment (named *drlnd*) with the d
 This environment contains the Unity-ML, as well as openAI gym, pytorch, etc.
 
 Next, download the specific unity environment for your OS using the links below.
-For the following environments, download and extract in this project's base directory:
+For the following environments, download and extract in the "p1_navigation" directory:
 * Linux (with Vis) - [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
 * Mac OSX - [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
 * Windows 32 bit - [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
