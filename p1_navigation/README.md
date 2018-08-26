@@ -43,3 +43,5 @@ To train, please load the *drlnd* conda environtment that was set up in "Getting
 To train from scratch, simply load the conda environment and invoke "python train.py" that outputs:
 - Trained model weights in a file called "navigation.pth" in the base directory.
 - Plot of all scores in a file called "trained_scores.png" in the base directory.
+
+To load weights into the agent, simply call the ".load_weighs()" method.  In this method, the path to the weight file is defaulted to the provided trained weights, but can be specified to another file.

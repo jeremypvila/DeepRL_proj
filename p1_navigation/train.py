@@ -33,6 +33,7 @@ batch_size = 64
 gamma=0.99  # discount factor
 lr=1e-4  # learning rate of the Adam optimizer (Optimizing MSE loss)
 agent = Agent(state_size=state_size, action_size=action_size, gamma=gamma, batch_size=batch_size, lr=lr, seed=0)
+# agent.load_weights()
 
 # Main DQN loop pulled from dqn section of udacity course.  Adapted to the new "BananaBrain" environment
 min_score = 13.0
@@ -78,7 +79,9 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
         if np.mean(scores_window)>=min_score:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
-            torch.save(agent.qnetwork_local.state_dict(), 'navigation.pth')
+            torch.save({'Q_est': agent.qnetwork_local.state_dict(), 
+                        'Q_target': agent.qnetwork_target.state_dict(),
+                        'opt': agent.optimizer.state_dict()}, 'navigation.pth')
             break
     return scores
 

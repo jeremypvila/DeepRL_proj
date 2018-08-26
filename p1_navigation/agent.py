@@ -53,6 +53,13 @@ class Agent():
         self.memory = ReplayBuffer(action_size, self.buffer_size, self.batch_size, seed)
         # Initialize time step (for updating every few steps)
         self.t_step = 0
+
+    def load_weights(self, wt_path="pre_trained.pth", load_opt=True):
+    	ckpt = torch.load(wt_path)
+    	self.qnetwork_local.load_state_dict(ckpt['Q_est'])
+    	self.qnetwork_target.load_state_dict(ckpt['Q_target'])  # Should target weights be saved as well?
+    	if load_opt:
+    		self.optimizer.load_state_dict(ckpt['opt']) # warm start optimizer
     
     def step(self, state, action, reward, next_state, done):
         # Save experience in replay memory
