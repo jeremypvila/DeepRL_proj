@@ -8,5 +8,7 @@ Please go to the individual project subfolders.
 
 ## Subprojects
 
--Currently contains autonomous robot cleaning
+- Project 1 - Navigation
+- Project 2 - Continuous Control
 
+Coded by Jeremy Vila
