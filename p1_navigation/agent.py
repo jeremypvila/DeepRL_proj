@@ -4,6 +4,7 @@ Contains Agent and Replay buffer classes
 
 Parts of this code were adapted from the dqn lesson of the course
 
+Jeremy Vila
 08/26/18
 '''
 
