@@ -3,6 +3,7 @@ Code for the deep model to define the Q function
 
 Parts of this code were adapted from the dqn lesson of the course
 
+Coded by Jeremy Vila
 8/26/18
 '''
 
