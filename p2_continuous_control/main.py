@@ -61,13 +61,13 @@ for ep in range(1, episodes+1):
 		if np.any(dones):
 			break 
 
-		scores_deque.append(scores)
-		# scores.append(scores)
-		print('\rEpisode {}\tAverage Score: {:.2f}\tScore: {:.2f}'.format(ep, np.mean(scores_deque), np.mean(scores)), end="")
-		if ep % 100 == 0:
-			torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
-			torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
-			print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque))) 
+	scores_deque.append(np.mean(scores))
+	# scores.append(scores)
+	print('\rEpisode {}\tAverage Score: {:.2f}\tScore: {:.2f}'.format(ep, np.mean(scores_deque), np.mean(scores)), end="")
+	if ep % 100 == 0:
+		torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
+		torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
+		print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque))) 
 
 # Load in the ddpg agent
 
