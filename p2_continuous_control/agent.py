@@ -24,12 +24,14 @@ class Agent(nn.Module):
         super(Agent, self).__init__()
         self.seed = torch.manual_seed(seed)
         
-        hidden_sizes = [32, 16]
+        hidden_sizes = [32, 16, 8, 4]
         dropout_rates = [.2, .2]
 
         self.fc1 = nn.Linear(state_size, hidden_sizes[0])
         self.fc2 = nn.Linear(hidden_sizes[0], hidden_sizes[1])
-        self.fc3 = nn.Linear(hidden_sizes[1], action_size)
+        self.fc3 = nn.Linear(hidden_sizes[1], hidden_size[2])
+        self.fc4 = nn.Linear(hidden_sizes[2], hidden_sizes[3])
+        self.fc5 = nn.Linear(hidden_sizes[3], action_size)
 
         # Dropout considered, but not needed!
         self.drop1 = nn.Dropout(p=dropout_rates[0])
