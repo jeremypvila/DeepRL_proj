@@ -10,10 +10,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as functional
 
-
 class Agent(nn.Module):
-
-	def __init__(self, state_size, action_size, seed):
+    def __init__(self, state_size, action_size, seed):
         """Initialize parameters and build model.
         Params
         ======
