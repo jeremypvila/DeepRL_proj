@@ -31,6 +31,34 @@ state_size = states.shape[1]
 print('There are {} agents. Each observes a state with length: {}'.format(states.shape[0], state_size))
 print('The state for the first agent looks like:', states[0])
 
+agent = Agent(state_size=env.observation_space.shape[0], action_size=env.action_space.shape[0], random_seed=0)
+
+episodes = 2
+max_time = 300
+
+scores_deque = deque(maxlen=100)
+scores = []
+max_score = -np.Inf
+for ep in range(1, episodes+1):
+	state = env.reset()
+	agent.reset()
+	score = 0
+	for t in range(max_time):
+		action = agent.act(state)
+		next_state, reward, done, _ = env.step(action)
+		agent.step(state, action, reward, next_state, done)
+		state = next_state
+		score += reward
+		if done:
+			break 
+		scores_deque.append(score)
+		scores.append(score)
+		print('\rEpisode {}\tAverage Score: {:.2f}\tScore: {:.2f}'.format(i_episode, np.mean(scores_deque), score), end="")
+		if i_episode % 100 == 0:
+			torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
+			torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
+			print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque))) 
+
 # Load in the ddpg agent
 
 '''
