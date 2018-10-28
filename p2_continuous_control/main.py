@@ -5,6 +5,7 @@ Main script that was used for laoding the environment
 
 from unityagents import UnityEnvironment
 from ddpg_agent import Agent
+from collections import deque
 import numpy as np 
 
 # Load the environment 
@@ -31,30 +32,39 @@ state_size = states.shape[1]
 print('There are {} agents. Each observes a state with length: {}'.format(states.shape[0], state_size))
 print('The state for the first agent looks like:', states[0])
 
-agent = Agent(state_size=env.observation_space.shape[0], action_size=env.action_space.shape[0], random_seed=0)
+print(state_size)
+print(action_size)
+agent = Agent(state_size=state_size, action_size=action_size, random_seed=0)
 
-episodes = 2
-max_time = 300
+episodes = 100
+max_time = 1000
 
 scores_deque = deque(maxlen=100)
-scores = []
 max_score = -np.Inf
 for ep in range(1, episodes+1):
-	state = env.reset()
-	agent.reset()
-	score = 0
+	env_info = env.reset(train_mode=True)[brain_name]
+	states = env_info.vector_observations
+
+	# state = env.reset()
+	agent.reset()  # Resets the noise in the agent
+	scores = np.zeros(num_agents)
 	for t in range(max_time):
-		action = agent.act(state)
-		next_state, reward, done, _ = env.step(action)
-		agent.step(state, action, reward, next_state, done)
-		state = next_state
-		score += reward
-		if done:
+
+		actions = agent.act(states)									# Get actions from policy (for each agent)
+		env_info = env.step(actions)[brain_name]           			# Perform actions in environment
+		next_states = env_info.vector_observations					# get next state (for each agent)
+		rewards = env_info.rewards                         			# get reward (for each agent)
+		dones = env_info.local_done									# get dones (for each agent)
+		agent.step(states, actions, rewards, next_states, dones)	# Add experience to buffer
+		states = next_states										# Reset states
+		scores += env_info.rewards									# Accumulate rewards
+		if np.any(dones):
 			break 
-		scores_deque.append(score)
-		scores.append(score)
-		print('\rEpisode {}\tAverage Score: {:.2f}\tScore: {:.2f}'.format(i_episode, np.mean(scores_deque), score), end="")
-		if i_episode % 100 == 0:
+
+		scores_deque.append(scores)
+		# scores.append(scores)
+		print('\rEpisode {}\tAverage Score: {:.2f}\tScore: {:.2f}'.format(ep, np.mean(scores_deque), np.mean(scores)), end="")
+		if ep % 100 == 0:
 			torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
 			torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
 			print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque))) 
