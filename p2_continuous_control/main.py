@@ -6,7 +6,8 @@ Main script that was used for laoding the environment
 from unityagents import UnityEnvironment
 from ddpg_agent import Agent
 from collections import deque
-import numpy as np 
+import numpy as np
+import torch
 
 # Load the environment 
 env = UnityEnvironment(file_name='/home/jeremy/projects/DeepRL_proj/p2_continuous_control/Reacher_Linux_NoVis/Reacher.x86_64')
@@ -36,7 +37,7 @@ print(state_size)
 print(action_size)
 agent = Agent(state_size=state_size, action_size=action_size, random_seed=0)
 
-episodes = 100
+episodes = 1000
 max_time = 1000
 
 scores_deque = deque(maxlen=100)
@@ -67,7 +68,7 @@ for ep in range(1, episodes+1):
 	if ep % 100 == 0:
 		torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
 		torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
-		print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque))) 
+		# print('\rEpisode {}\tAverage Score: {:.2f}'.format(ep, np.mean(scores_deque))) 
 
 # Load in the ddpg agent
 
