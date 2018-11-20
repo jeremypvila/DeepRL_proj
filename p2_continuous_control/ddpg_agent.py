@@ -64,8 +64,8 @@ class Agent():
         self.critic_target.load_state_dict(critic['target'])
 
         if load_opt:
-            self.actor_optimizer=load_state_dict(actor['opt'])
-            self.critic_optimizer=load_state_dict(critic['opt'])
+            self.actor_optimizer.load_state_dict(actor['opt'])
+            self.critic_optimizer.load_state_dict(critic['opt'])
     
     def step(self, state, action, reward, next_state, done):
         # Save experience
