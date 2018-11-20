@@ -38,7 +38,7 @@ agent = Agent(state_size=state_size, action_size=action_size, random_seed=0)
 # agent = agent.load_weights()
 
 episodes = 2000  # Number of episodes
-max_time = 1000  # Max number of time steps per episode
+max_time = 500  # Max number of time steps per episode
 max_score = 32.  # average score to beat
 
 # Score lists
