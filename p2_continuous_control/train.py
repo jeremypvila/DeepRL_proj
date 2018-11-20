@@ -16,7 +16,7 @@ import numpy as np
 import torch
 
 # Load the environment 
-env = UnityEnvironment(file_name='/home/jeremy/projects/DeepRL_proj/p2_continuous_control/Reacher_Linux_NoVis/Reacher.x86_64')
+env = UnityEnvironment(file_name='Reacher_Linux_NoVis/Reacher.x86_64')
 
 # get the default brain
 brain_name = env.brain_names[0]
