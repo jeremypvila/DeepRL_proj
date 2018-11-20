@@ -1,4 +1,4 @@
-# # Deep RL Continuous Control Project Implementation
+## Deep RL Continuous Control Project Implementation
 
 ## Project Details
 
