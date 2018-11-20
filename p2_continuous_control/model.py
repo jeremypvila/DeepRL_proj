@@ -71,7 +71,6 @@ class Critic(nn.Module):
         self.fc4.bias.data.fill_(0.05)
 
     def forward(self, state, action):
-        """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
         xs = F.relu(self.fc1(state))
         # Concatenate hidden layer and actions
         x = torch.cat((xs, action), dim=1)
