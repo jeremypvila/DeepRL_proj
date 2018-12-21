@@ -10,5 +10,6 @@ Please go to the individual project subfolders.
 
 - Project 1 - Navigation
 - Project 2 - Continuous Control
+- Projcet 3 - Collaboration and Competition
 
 Coded by Jeremy Vila
