@@ -11,7 +11,7 @@ Jeremy Vila
 '''
 
 from unityagents import UnityEnvironment
-from madddpg_agent import MADDPG
+from maddpg_agent import MADDPG
 from collections import deque
 import matplotlib.pyplot as plt
 import numpy as np
