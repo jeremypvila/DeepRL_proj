@@ -8,7 +8,7 @@ The trained MADDPG model achieves the objective of the project two agents to pla
 A reward of +0.1 is provided to an agent if it hits the ball over the net.
 If an agent lets the ball hit the floor, their side of the table, or hits the ball out of play it gets a score of -0.01.
 The project is considered complete if an average score of +0.5 is achieved over a window of 100 episodes (after a maximum is taken between the scores of the agents).
-Therefor the goal is to train a pair of agents to play with each other as long as possible.
+Therefore, the goal is to train a pair of agents to play with each other as long as possible.
 
 For each agent, there are 8 variables in the observation space corresponding to position and velocity of the ball and racket. 
 For each agent, there are 2 actions, corresponding to moving towards the net and jumping. 
